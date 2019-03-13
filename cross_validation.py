@@ -229,5 +229,33 @@ for validate_time in range(0, validate_times, 1):
                             ia_dic[similarity_threshold, amplify, inverse_frequency] = [0, 0, 0, 0]
                         for i in range(0, 4, 1):
                             ia_dic[similarity_threshold, amplify, inverse_frequency][i] += score[i]
-
+                            
+# output prediction error to files
+uc_result = open("uc_result.txt", "w")
+up_result = open("up_result.txt", "w")
+ic_result = open("ic_result.txt", "w")
+ia_result = open("ia_result.txt", "w")
+for key in ia_dic.keys():
+    for attribute in key:
+        uc_result.write(str(attribute) + " ")
+        up_result.write(str(attribute) + " ")
+        ic_result.write(str(attribute) + " ")
+        ia_result.write(str(attribute) + " ")
+    for i in range(0, 4, 1):
+        uc_dic[key][i] /= validate_times
+        uc_result.write(str(uc_dic[key][i]) + " ")
+        up_dic[key][i] /= validate_times
+        up_result.write(str(up_dic[key][i]) + " ")
+        ic_dic[key][i] /= validate_times
+        ic_result.write(str(ic_dic[key][i]) + " ")
+        ia_dic[key][i] /= validate_times
+        ia_result.write(str(ia_dic[key][i]) + " ")
+    uc_result.write("\n")
+    up_result.write("\n")
+    ic_result.write("\n")
+    ia_result.write("\n")
+uc_result.close()
+up_result.close()
+ic_result.close()
+ia_result.close()
 
